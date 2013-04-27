@@ -165,6 +165,16 @@ function predefinedColors($colorname) {
 			$command['sat'] = 254;
 			$command['bri'] = 254;
 			break;
+		case "pink-purple":
+			$command['hue'] =  182 * 300;
+			$command['sat'] = 254;
+			$command['bri'] = 254;
+			break;
+		case "yellow":
+			$command['hue'] =  182 * 85;
+			$command['sat'] = 254;
+			$command['bri'] = 254;
+			break;
 
 	}
 	return $command;
