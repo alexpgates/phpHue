@@ -101,7 +101,7 @@ function setGroup($groupid, $input, $transition=4) {
 	if(isset($transition)){
 		$input['transitiontime'] = $transition;
 	}
-	
+
 	$data = json_encode($input);
 	$result = '';
 
@@ -178,6 +178,11 @@ function predefinedColors($colorname) {
 			break;
 		case "yellow":
 			$command['hue'] =  182 * 85;
+			$command['sat'] = 254;
+			$command['bri'] = 254;
+			break;
+		case "orange":
+			$command['hue'] =  182 * 25;
 			$command['sat'] = 254;
 			$command['bri'] = 254;
 			break;
