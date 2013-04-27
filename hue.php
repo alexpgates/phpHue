@@ -1,7 +1,7 @@
 <?php
 
-$bridge = '192.168.1.138';
-$key = '16e909913bb833b728dbdbc554f95eb';
+$bridge = '10.0.1.18';
+$key = 'weatheruser';
 
 require('pest-master/PestJSON.php');
 
@@ -43,7 +43,7 @@ function getLightState($lightid = false) {
 		$result[$id] = $state;
 
 	}
-	return $state;
+	return $result;
 }
 
 // Returns an array of the light numbers in the system
