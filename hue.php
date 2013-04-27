@@ -86,6 +86,27 @@ function setLight($lightid, $input) {
 	return $result;
 }
 
+// function for setting the state property of a group of lights
+function setGroup($groupid, $input) {
+	global $bridge, $key;
+	$pest = new Pest("http://$bridge/api/$key/");
+	$data = json_encode($input);
+	$result = '';
+
+	if (is_array($groupid)) {
+		foreach ($groupid as $id) {
+			$pest = new Pest("http://$bridge/api/$key/");
+			$result .= $pest->put("groups/$id/action", $data);
+		}
+	} else {
+		$result = $pest->put("groups/$groupid/action", $data);
+		echo "<pre>";
+		print_r($result);
+		echo "</pre>";
+	}
+	return $result;
+}
+
 // gin up a random color
 function getRandomColor() {
 	$return = array();
