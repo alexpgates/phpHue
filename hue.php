@@ -69,9 +69,15 @@ function alertLight($target, $type = 'select') {
 }
 
 // function for setting the state property of one or more lights
-function setLight($lightid, $input) {
+function setLight($lightid, $input, $transition=4) {
 	global $bridge, $key;
 	$pest = new Pest("http://$bridge/api/$key/");
+
+	// transition
+	if(isset($transition)){
+		$input['transitiontime'] = $transition;
+	}
+
 	$data = json_encode($input);
 	$result = '';
 
