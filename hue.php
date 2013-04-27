@@ -93,9 +93,15 @@ function setLight($lightid, $input, $transition=4) {
 }
 
 // function for setting the state property of a group of lights
-function setGroup($groupid, $input) {
+function setGroup($groupid, $input, $transition=4) {
 	global $bridge, $key;
 	$pest = new Pest("http://$bridge/api/$key/");
+
+	// transition
+	if(isset($transition)){
+		$input['transitiontime'] = $transition;
+	}
+	
 	$data = json_encode($input);
 	$result = '';
 
