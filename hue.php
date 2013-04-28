@@ -112,9 +112,6 @@ function setGroup($groupid, $input) {
 		}
 	} else {
 		$result = $pest->put("groups/$groupid/action", $data);
-		echo "<pre>";
-		print_r($result);
-		echo "</pre>";
 	}
 	return $result;
 }
