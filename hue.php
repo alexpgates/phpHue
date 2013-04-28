@@ -129,6 +129,22 @@ function getRandomWhite() {
 	return $return;
 }
 
+function dayWhite() {
+	$command = array();
+	$command['ct'] =  300;
+	$command['bri'] = 254;
+	$command['transitiontime'] = 80;
+	setGroup(0, $command);
+}
+
+function nightWhite() {
+	$command = array();
+	$command['ct'] =  450;
+	$command['bri'] = 254;
+	$command['transitiontime'] = 80;
+	setGroup(0, $command);
+}
+
 // build a few color commands based on color names.
 function predefinedColors($colorname) {
 	$command = array();
