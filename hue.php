@@ -132,6 +132,7 @@ function getRandomWhite() {
 
 function dayWhite() {
 	$command = array();
+	$command['on'] = true;
 	$command['ct'] =  300;
 	$command['bri'] = 254;
 	$command['transitiontime'] = 80;
@@ -140,6 +141,7 @@ function dayWhite() {
 
 function nightWhite() {
 	$command = array();
+	$command['on'] = true;
 	$command['ct'] =  450;
 	$command['bri'] = 254;
 	$command['transitiontime'] = 80;
