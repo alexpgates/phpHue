@@ -2,6 +2,7 @@
 
 $bridge = '10.0.1.18';
 $key = 'weatheruser';
+$utc_adjustment = 18000; // + or -, this is the user's adjustment to UTC from local time zone (used in scheduling functions)
 
 require('pest-master/PestJSON.php');
 
@@ -203,6 +204,58 @@ function getSchedules() {
 
 	$pest = new PEST("http://$bridge/api/$key/");
 	$schedules = json_decode($pest->get("schedules"), true);
+
+	return $schedules;
+}
+
+// Creates a scheduled event
+function createSchedule($wrapper){
+	global $bridge, $key, $utc_adjustment;
+
+	// This function accepts $time as a unix timestamp and will perform the conversion to ISO 8601:2004
+	//Time when the scheduled event will occur in ISO 8601:2004 format.
+	//The bridge measures time in UTC and only accepts extended format, non-recurring, local time (YYYY-MM-DDThh:mm:ss). 
+	//Incorrectly formatted dates will raise an error of type 7. If the time is in the past an error 7 will also be raised.
+
+	// a rough example
+
+	// $schedule_wrapper = array();
+	// $schedule_command = array();
+	// $schedule_body = array();
+
+	// $schedule_wrapper['name'] = 'First Schedule Test';
+	// $schedule_wrapper['time'] = '1367198360';
+	// $schedule_wrapper['description'] = 'My attempt at a scheduled command';
+	// $schedule_wrapper['command']['address'] = '/api/'.$key.'/groups/0/action';
+	// $schedule_wrapper['command']['method'] = 'PUT';
+	// $schedule_wrapper['command']['body'] = array('on' => true);
+
+	// createSchedule($schedule_wrapper);
+
+	$data = array();
+	$data['name'] = $wrapper['name'];
+	$data['description'] = $wrapper['description'];
+
+	// adjust time for utc
+	$time = $wrapper['time'] + $utc_adjustment;
+
+	$data['time'] = date('c', $time);
+	echo $data['time'];
+	$data['command'] = $wrapper['command'];
+
+	$json_body = json_encode($data);
+
+	$pest = new PEST("http://$bridge/api/$key/");
+	$schedules = json_decode($pest->post("schedules", $json_body), true);
+
+
+}
+
+function deleteSchedule($id){
+	global $bridge, $key;
+
+	$pest = new PEST("http://$bridge/api/$key/");
+	$schedules = json_decode($pest->delete("schedules/$id"), true);
 
 	return $schedules;
 }
