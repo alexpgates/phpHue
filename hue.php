@@ -47,6 +47,15 @@ function getLightState($lightid = false) {
 	return $result;
 }
 
+// simple function to return true or false when asked if a light is on
+function lightIsOn($lightid){
+	global $bridge, $key;
+	$pest = new PEST("http://$bridge/api/$key/");
+	$deets = json_decode($pest->get("lights/$lightid"), true);
+	$on = $deets['state']['on'];
+	return($on);
+}
+
 // Returns an array of the light numbers in the system
 function getLightIdsList() {
 	
