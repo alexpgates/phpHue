@@ -69,14 +69,9 @@ function alertLight($target, $type = 'select') {
 }
 
 // function for setting the state property of one or more lights
-function setLight($lightid, $input, $transition=4) {
+function setLight($lightid, $input) {
 	global $bridge, $key;
 	$pest = new Pest("http://$bridge/api/$key/");
-
-	// transition
-	if(isset($transition)){
-		$input['transitiontime'] = $transition;
-	}
 
 	$data = json_encode($input);
 	$result = '';
@@ -93,14 +88,9 @@ function setLight($lightid, $input, $transition=4) {
 }
 
 // function for setting the state property of a group of lights
-function setGroup($groupid, $input, $transition=4) {
+function setGroup($groupid, $input) {
 	global $bridge, $key;
 	$pest = new Pest("http://$bridge/api/$key/");
-
-	// transition
-	if(isset($transition)){
-		$input['transitiontime'] = $transition;
-	}
 
 	$data = json_encode($input);
 	$result = '';
