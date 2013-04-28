@@ -197,4 +197,14 @@ function predefinedColors($colorname) {
 	return $command;
 }
 
+// Returns a big array of the currently set schedules
+function getSchedules() { 
+	global $bridge, $key;
+
+	$pest = new PEST("http://$bridge/api/$key/");
+	$schedules = json_decode($pest->get("schedules"), true);
+
+	return $schedules;
+}
+
 ?>
